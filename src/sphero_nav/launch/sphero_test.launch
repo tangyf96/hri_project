@@ -1,0 +1,3 @@
+<launch>
+  <node name ="sphero_test" pkg = "sphero_nav" type = "sphero_test.py" output = "screen" />
+</launch>

@@ -1,0 +1,8 @@
+digraph G {
+"world" -> "vicon/Helmet_1/Helmet_1"[label="Broadcaster: /vicon\nAverage rate: 27.218 Hz\nMost recent transform: 1543957188.074 ( 0.021 sec old)\nBuffer length: 4.960 sec\n"];
+"world" -> "vicon/Sphero13/Sphero13"[label="Broadcaster: /vicon\nAverage rate: 86.694 Hz\nMost recent transform: 1543957188.074 ( 0.021 sec old)\nBuffer length: 4.960 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1543957188.095"[ shape=plaintext ] ;
+ }->"world";
+}

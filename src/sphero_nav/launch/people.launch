@@ -1,0 +1,6 @@
+<launch>
+  <node name = "people_detection" pkg="people_detection" type="fake_detection" output = "screen" />
+  <!--node name = "dynamic_layers" pkg="dynamic_social_costmap" type="dynamic_social_layers" output = "screen" /-->
+  <node name = "people_prediction" pkg="people_prediction" type="constant_velocity_prediction" output="screen" />
+
+</launch>

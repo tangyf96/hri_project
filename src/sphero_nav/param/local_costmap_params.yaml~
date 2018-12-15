@@ -1,0 +1,15 @@
+local_costmap:
+   global_frame: /odom
+   robot_base_frame: /base_link
+   update_frequency: 5.0 # 2.0
+   publish_frequency: 2.0
+   static_map: true
+   rolling_window: true
+   width: 1 # 0.5 1 
+   height: 1 #0.5 1 
+   resolution: 0.001
+   transform_tolerance: 2.0 # 0.5
+   plugins:
+    - {name: static_layer, type: "costmap_2d::StaticLayer"}
+    - {name: obstacle_layer,      type: "costmap_2d::VoxelLayer"}
+    - {name: inflation_layer,     type: "costmap_2d::InflationLayer"}

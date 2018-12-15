@@ -1,0 +1,68 @@
+
+recovery_behaviour_enabled: false
+controller_frequency: 1.0 # 20.0
+
+NavfnROS:
+  allow_unknowno: false # Specifies whether or not to allow navfn to create plans that traverse unknown space.
+  default_tolerance: 0.1 # A tolerance on the goal point for the planner.
+
+DWAPlannerROS:
+  max_vel_x: 2.0  # 0.55
+  min_vel_x: 0.1 # 0.2 
+
+  max_vel_y: 2.0  # diff drive robot
+  min_vel_y: -0.1  # diff drive robot
+
+  max_trans_vel: 0.55 # choose slightly less than the base's capability
+  min_trans_vel: 0.1  # this is the min trans velocity when there is negligible rotational velocity
+  # trans_stopped_vel: 0.1
+
+  acc_lim_x: 2.5 # maximum is theoretically 2.0, but we  1.0
+  acc_lim_theta: 3.2 # 10.0
+  acc_lim_y: 2.5      # diff drive robot 0.0
+
+  # Warning!
+  #   do not set min_trans_vel to 0.0 otherwise dwa will always think translational velocities
+  #   are non-negligible and small in place rotational velocities will be created.
+
+  max_rot_vel: 1.0  # 5.0 choose slightly less than the base's capability
+  min_rot_vel: 0.4  # this is the min angular velocity when there is negligible translational velocity
+  #rot_stopped_vel: 0.4
+  
+
+# Goal Tolerance Parameters
+  yaw_goal_tolerance: 0.1  # 0.05 change
+  xy_goal_tolerance: 0.2 # 0.10 0.05 change
+  latch_xy_goal_tolerance: false
+
+# Forward Simulation Parameters
+  sim_time: 1.7      # 1.7
+  sim_granularity: 0.04 # 0.025
+  angular_sim_granularity: 0.02
+  vx_samples: 10       # 3 change
+  vy_samples: 10      # diff drive robot, there is only one sample
+  vtheta_samples: 20  # 20
+
+# Trajectory Scoring Parameters
+  path_distance_bias: 32.0      # 32.0   - weighting for how much it should stick to the global path plan
+  goal_distance_bias: 36.0      # 24.0   - wighting for how much it should attempt to reach its goal
+  occdist_scale: 0.01            # 0.01   - weighting for how much the controller should avoid obstacles
+  forward_point_distance: 0.325 # 0.325  - how far along to place an additional scoring point
+  stop_time_buffer: 0.2         # 0.2    - amount of time a robot must stop in before colliding for a valid traj.
+  scaling_speed: 0.25           # 0.25   - absolute velocity at which to start scaling the robot's footprint
+  max_scaling_factor: 0.2       # 0.2    - how much to scale the robot's footprint when at speed.
+
+# Oscillation Prevention Parameters
+  oscillation_reset_dist: 0.05  # 0.05   - how far to travel before resetting oscillation flags
+
+  # add this
+  # prune_plan: true
+
+# Debugging
+  publish_traj_pc : true
+  publish_cost_grid_pc: false
+  global_frame_id: odom
+
+
+# Differential-drive robot configuration - necessary?
+#  holonomic_robot: false

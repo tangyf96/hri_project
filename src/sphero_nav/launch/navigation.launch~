@@ -1,0 +1,34 @@
+<launch>  
+  <arg name="initial_pose_x" default="0" />
+  <arg name="initial_pose_y" default="0" />
+  <arg name="initial_pose_a" default="0" />
+  <!-- include file="$(find sphero_bringup)/launch/sphero.launch"--><!--/include-->
+
+  <!-- Map server -->
+  <arg name="map_file" default= "$(find sphero_nav)/maps/map.yaml"/>
+  <node name="map_server" pkg = "map_server" type = "map_server" args="$(arg map_file)" />
+
+  <!-- robot model-->
+  <arg name = "model" />
+  <param name="gui" value="True"/>
+
+  
+  <!-- state publisher, bring tf -->
+  <node name = "state_publisher" pkg = "sphero_nav" type = "state_publisher" output = "screen"/>
+  
+  <param name = "robot_description" command="cat $(find sphero_nav)/sphero_description/urdf/sphero.urdf" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"  output="screen">
+    <!--remap from="robot_description" to="myrobot" /-->
+    <!--remap from="joint_states" to="robot_description/joint_states" /-->
+    <param name="publish_frequency" type="double" value="200.0" />
+    <!--param name="tf_prefix" type="string" value="" /-->
+  </node>
+
+  <!-- Run rviz -->
+  <include file="$(find sphero_nav)/launch/rviz.launch" />
+
+  <include file="$(find sphero_nav)/launch/includes/move_base.launch.xml" />  
+  <!--include file="$(find sphero_nav)/launch/people.launch" output = "screen" /-->
+ 
+</launch>

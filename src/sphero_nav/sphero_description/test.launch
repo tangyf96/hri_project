@@ -1,0 +1,14 @@
+<launch>
+  <arg name = "model" />
+  <param name="gui" value="True"/>
+  <node name="rviz" pkg = "rviz" type = "rviz" />
+  <param name="robot_description" textfile='$(find sphero_description)/urdf/sphero.urdf' />
+  
+
+  <!-- node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+    <param name="publish_frequency" type="double" value="200.0" />
+    <!--param name="tf_prefix" type="string" value="" /-->
+  </node>
+  
+</launch>

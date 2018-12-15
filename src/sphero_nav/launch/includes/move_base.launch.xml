@@ -1,0 +1,32 @@
+<!-- 
+    ROS navigation stack with velocity smoother and safety (reactive) controller
+-->
+<launch>
+
+  <arg name="odom_topic" default="odom" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <!--param name = "base_local_planner" value = "dwa_local_planner/DWAPlannerROS"/-->
+    <!--param name = "base_local_planner" value = "base_local_planner/TrajectoryPlannerROS" /-->
+    <!--param name = "base_global_planner" value = "navfn/NavfnROS" /-->
+    <param name = "base_local_planner" value = "path_executer/PathFollower"/>
+    <param name = "base_global_planner" value = "lattice_planner/TBPlanner" />
+    <rosparam file="$(find sphero_nav)/param/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find sphero_nav)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find sphero_nav)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find sphero_nav)/param/global_costmap_params.yaml" command="load" />
+    <!--rosparam file="$(find sphero_nav)/param/base_local_planner_params.yaml" command="load" /-->
+    <!--rosparam file="$(find sphero_nav)/param/dwa_local_planner_params.yaml" command="load" /-->
+
+    <rosparam file="$(find lattice_planner)/config/global_planner_params.yaml" command="load" />
+    <rosparam file="$(find timed_path_follower)/config/local_planner_params.yaml" command="load" />
+    <rosparam file="$(find sphero_nav)/param/move_base_params.yaml" command="load" />
+
+<!--
+    <remap from="cmd_vel" to="navigation_velocity_smoother/raw_cmd_vel"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+-->
+
+  </node>
+</launch>
+

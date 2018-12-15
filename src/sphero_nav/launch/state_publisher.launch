@@ -1,0 +1,6 @@
+<launch>
+    <!-- param name = "robot_description" command = "cat $(find sphero_nav)/sphero_description/urdf/sphero.urdf" /-->
+    <!--node name = "robot_state_publisher" pkg = "robot_state_publisher" type = "state_publisher" /-->
+    <node name = "state_publisher" pkg = "sphero_nav" type = "state_publisher" output = "screen"/>
+
+</launch>

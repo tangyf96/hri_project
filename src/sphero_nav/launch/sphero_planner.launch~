@@ -1,0 +1,11 @@
+<launch>
+   <!--include file="$(find sphero_bringup)/launch/sphero.launch"--><!--/include-->
+
+   <!-- Map server -->
+   <arg name="map_file" default="$(find sphero_nav)/maps/testmap.yaml"/>
+   <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+   <!-- Move base -->
+   <include file="$(find sphero_nav)/launch/includes/move_base.launch.xml"/>
+
+ </launch>
