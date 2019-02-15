@@ -61,53 +61,53 @@ void human_callback(const geometry_msgs::TransformStampedPtr& msg)
      ros::AsyncSpinner spinner(1);
      //spinner.start();
      while (ros::ok()) {
-         joint_state.header.stamp = ros::Time::now();
-         joint_state.name.resize(1);
-         joint_state.position.resize(1);
-         joint_state.name[0] ="dummy";
-         joint_state.position[0] = pos;
-         // update transform
-	spinner.start();
+        joint_state.header.stamp = ros::Time::now();
+        joint_state.name.resize(1);
+        joint_state.position.resize(1);
+        joint_state.name[0] ="dummy";
+        joint_state.position[0] = pos;
+        // update transform
+	    spinner.start();
     	ros::spinOnce();
     	ros::Rate rate(1.0);
     	spinner.stop();
-         map.header.stamp = ros::Time::now();
-         map.transform.translation.x = 0;
-         map.transform.translation.y = 0;
-         map.transform.translation.z = 0;
-         map.transform.rotation = tf::createQuaternionMsgFromYaw(0);
-         broadcaster1.sendTransform(map);
-         odom_trans.header.stamp = ros::Time::now();
-	 //ROS_INFO("odom_trans: %f", odom_trans.header.stamp.toSec());
-         odom_trans.transform.translation.x = 0;
-         odom_trans.transform.translation.y = 0;
-         odom_trans.transform.translation.z = 0;
-         odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(0);
+        map.header.stamp = ros::Time::now();
+        map.transform.translation.x = 0;
+        map.transform.translation.y = 0;
+        map.transform.translation.z = 0;
+        map.transform.rotation = tf::createQuaternionMsgFromYaw(0);
+        broadcaster1.sendTransform(map);
+        odom_trans.header.stamp = ros::Time::now();
+        //ROS_INFO("odom_trans: %f", odom_trans.header.stamp.toSec());
+        odom_trans.transform.translation.x = 0;
+        odom_trans.transform.translation.y = 0;
+        odom_trans.transform.translation.z = 0;
+        odom_trans.transform.rotation = tf::createQuaternionMsgFromYaw(0);
 
-         broadcaster3.sendTransform(odom_trans);
-         ros::spinOnce();
-	 //ros::Time now = ros::Time::now() - ros::Duration(0.1);
-	 ros::Time now = ros:: Time::now();
+        broadcaster3.sendTransform(odom_trans);
+        ros::spinOnce();
+        //ros::Time now = ros::Time::now() - ros::Duration(0.1);
+        ros::Time now = ros:: Time::now();
 
          // robot to world
-	 odom_world_trans.header.stamp = now;
-	 odom_world_trans.transform.translation.x = x;
-	 odom_world_trans.transform.translation.y = y;
-	 odom_world_trans.transform.translation.z = 0.0;
-	 tf::Matrix3x3 m(transform.getRotation());
-	 double roll, pitch, yaw;
-  	 m.getRPY(roll, pitch, yaw);
-	 odom_world_trans.transform.rotation = tf::createQuaternionMsgFromYaw(yaw);
+        odom_world_trans.header.stamp = now;
+        odom_world_trans.transform.translation.x = x;
+        odom_world_trans.transform.translation.y = y;
+        odom_world_trans.transform.translation.z = 0.0;
+        tf::Matrix3x3 m(transform.getRotation());
+        double roll, pitch, yaw;
+        m.getRPY(roll, pitch, yaw);
+        odom_world_trans.transform.rotation = tf::createQuaternionMsgFromYaw(yaw);
 
-         broadcaster2.sendTransform(odom_world_trans);
+        broadcaster2.sendTransform(odom_world_trans);
 	 
-	 dist = sqrt((human_x - x)*(human_x - x) + (human_y - y) * (human_y - y));
-         std_msgs::Float32 d;
-	 d.data = dist;
-	 dist_pub.publish(d);
-         ros::spinOnce();
-         joint_pub.publish(joint_state);
-         ros::spinOnce();
+        dist = sqrt((human_x - x)*(human_x - x) + (human_y - y) * (human_y - y));
+        std_msgs::Float32 d;
+        d.data = dist;
+        dist_pub.publish(d);
+        ros::spinOnce();
+        joint_pub.publish(joint_state);
+        ros::spinOnce();
 
      }
      //spinner.stop();
