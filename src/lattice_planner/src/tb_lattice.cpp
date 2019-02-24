@@ -343,10 +343,6 @@ bool AStarLattice::getPath(geometry_msgs::PoseStamped start,
                            geometry_msgs::PoseStamped goal, bool replanning,
                            std::vector<geometry_msgs::PoseStamped>& path)
 {
-  std::cout << "makePlanService start.x:" << start.pose.position.x << std::endl;
-  std::cout << "makePlanService start.y:" << start.pose.position.y << std::endl;
-  std::cout << "makePlanService goal.x:" << goal.pose.position.x << std::endl;
-  std::cout << "makePlanService goal.y:" << goal.pose.position.y << std::endl;
   reset();
 
   ros::Time begin = start.header.stamp;

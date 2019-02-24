@@ -270,13 +270,14 @@ namespace path_executer
     ros::Time now = ros::Time::now();
     if(findWaypointAtTime(now, waypoint, waypoint_vel))
     { 
-      
+      /*
       std::cout<<"waypoint is:"<<std::endl;
       std::cout<<waypoint.pose.position.x<<std::endl;
       std::cout<<waypoint.pose.position.y<<std::endl;
       std::cout<<"robot pose is:"<<std::endl;
       std::cout<<robot_pose.getOrigin().getX()<<std::endl;
       std::cout<<robot_pose.getOrigin().getY()<<std::endl;
+      */
       tf::Pose waypnt;
       tf::poseMsgToTF(waypoint.pose, waypnt);
 
@@ -296,7 +297,7 @@ namespace path_executer
       double rho = hypot(delta_x, delta_y);
       ROS_INFO("delta_x %f",delta_x);
       ROS_INFO("delta_y %f", delta_y);
-      std::cout << "rho is:" << rho << std::endl;
+      //std::cout << "rho is:" << rho << std::endl;
       double alpha = atan2(-1*delta_y, -1*delta_x) - phi;
 
       //if delta_x and delta_y are both very small, the angle is not properly
